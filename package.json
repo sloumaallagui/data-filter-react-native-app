@@ -9,13 +9,35 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~47.0.12",
+    "@babel/parser": "^7.20.7",
+    "@expo/webpack-config": "^0.17.2",
+    "@react-native-async-storage/async-storage": "~1.17.3",
+    "@react-native-community/checkbox": "^0.5.14",
+    "@react-navigation/drawer": "^6.5.7",
+    "@react-navigation/native": "^6.1.2",
+    "body-parser": "^1.20.1",
+    "expo": "^47.0.0",
     "expo-status-bar": "~1.4.2",
+    "fs": "^0.0.1-security",
+    "node-xlsx": "^0.21.0",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-dom": "18.1.0",
+    "react-native": "0.70.5",
+    "react-native-file-viewer": "^2.1.5",
+    "react-native-fs": "^2.20.0",
+    "react-native-gesture-handler": "~2.8.0",
+    "react-native-reanimated": "~2.12.0",
+    "react-native-safe-area-context": "4.4.1",
+    "react-native-screens": "~3.18.0",
+    "react-native-table-component": "^1.2.2",
+    "react-native-web": "~0.18.7",
+    "react-native-webview": "11.23.1",
+    "read-excel-file": "^5.5.3",
+    "xlsx": "^0.18.5",
+    "expo-checkbox": "~2.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.19.3"
   },
   "private": true
 }
