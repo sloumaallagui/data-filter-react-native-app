@@ -1,19 +1,46 @@
 import * as React from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { Button, View, Text } from 'react-native';
 import SearchResultScreen from './SearchResultScreen';
 import SearchParamScreen from './SearchParamsScreen';
 
-const Drawer = createDrawerNavigator();
 
-export default function SearchMenu() {
+const Stack = createStackNavigator();
+
+export default function SearchMenu({ navigation }) {
+
+    let gotoSearch=()=>{
+      navigation.navigate('SearchParamScreen');
+    }
     return (
-      <Drawer.Navigator
-        useLegacyImplementation
-        drawerContent={(props) => <SearchParamScreen {...props} />}
+      <NavigationContainer>
+      <Stack.Navigator initialRouteName="Accueil" 
+      screenOptions={{
+        headerShown: true,
+        defaultNavigationOptions : ({ navigation }) => ({
+          title: "Screen"
+        })
+       
+      }}
+      
       >
-        <Drawer.Screen name="Rechercher" component={SearchResultScreen} />
-      </Drawer.Navigator>
+        <Stack.Screen name="Accueil" component={SearchResultScreen} 
+          options={{
+            headerRight: () => (
+              <Button
+                onPress={() => {gotoSearch();
+                }}
+                title="Info"
+                color="#fff"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen name="SearchParamScreen" component={SearchParamScreen} />
+      </Stack.Navigator>
+      </NavigationContainer>
+
+      
     );
   }

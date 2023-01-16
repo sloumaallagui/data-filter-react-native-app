@@ -7,51 +7,83 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { WebView } from 'react-native-webview';
 import DataService from '../services/DataService';
+import { useRef } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function SearchResultScreen({ navigation }) {
-    //const [tableHead, tableData ]= useState(0,0);
+export default function SearchResultScreen({props}) {
+   
+    const [table, setTableData ]= useState(null,[]);
+    const webViewRef = useRef();
+     AsyncStorage.getItem('penAuxValue').then((value) => {
+
+      console.log("value"+value);
+    });
     //const [data, setData] = useState([],[]);
     
     let data= JSON.parse(DataService.data);
-    data = data.Feuil1;    // make a html table in a string and fill it with saved asyncStorage data
-    let table = '<table class="table table-striped table-bordered table-hover table-sm" style="width:100%;font-size: 12px;">';
+    data = data.Feuil1;    // make a html tab in a string and fill it with saved asyncStorage data
+     let tab = '<table class="table table-striped table-bordered table-hover table-sm" style="width:100%;font-size: 12px;">';
     // table head will be the first row of the data
-    table += '<thead class="thead-dark>';  
-    table += '<tr>';
-    for (let i = 0; i < data[0].length; i++) {
-        table += '<th>' + data[0][0] + '</th>';
+    tab += '<thead class="thead-dark">';  
+    tab += '<tr>';
+    console.log(" data 0"+ JSON.stringify(data.length) );
+    // foreach data[0] key and add it to table
+    let keys=[]
+    for (let k in data[0]) {
+        tab += '<th>' + k + '</th>';
+        keys.push(k);
     }
-    table += '</tr>';
-    table += '</thead>';
+    tab += '</tr>';
+    tab += '</thead>';
     // table body
-    table += '<tbody>';
-    for (let i = 1; i < data.length; i++) {
+    tab += '<tbody>';
+    for (let i=0;i< data.length;i++) {
 
-        table += '<tr>';
-        for (let j = 0; j < data[i].length; j++) {
-            table += '<td>' + data[i][j] + '</td>';
-        }
-        table += '</tr>';
-    }
-    table += '</tbody>';
-    table += '</table>';
-    //console.log(table);
+        tab += '<tr>';
+      
+
+            for(let key of keys ){
+              tab += '<td>' + data[i][key]+ '</td>';
+            }
+          
+      
+       
+        
+        tab += '</tr>';
+    } 
+    tab += '</tbody>';
+
     //console.log(data);
-    console.log(data[0]);
-    console.log(data[1]); 
-    console.log(data);
+    //console.log(data[0]);
+    useEffect(()=>{
+      setTableData(tab);
+      webViewRef.current.reload();
+      console.log("use effect");
+    }, [])
+  
+
+
 
 
 
     return (
+      <View style={{ flex: 1 }} >
+        <Button title="Go to Details" onPress={() => props.navigation.navigate('Recherche')} />
       <View style={{ flex: 1 }}>
-        <WebView
+       <WebView
+            bounces={false}
+            ref={(ref) => (webViewRef.current = ref)}
               showsHorizontalScrollIndicator={false}
               originWhitelist={['*']}
               javaScriptEnabled={true}
+              injectedJavaScript={`
+                   document.getElementById('main').innerHTML='${table}'`}
               domStorageEnabled={true}
-              source={{ html: HEADER +table+FOOTER }}
+              source={{ html: HEADER +FOOTER }}
+              
             />
+        
+      </View>
       </View>
     );
   }
@@ -70,12 +102,14 @@ export default function SearchResultScreen({ navigation }) {
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      
-     <meta name="viewport"content="width=device-width, initial-scale=0.45, maximum-scale=2, user-scalable=1">
+     <meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=1">
      <title>ISSATSO NEWS</title>
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
  </head>
- <body  >
+ <body >
  <center >
+ <div id="main">
+ </div>
  `
 const FOOTER = `
  </center>
