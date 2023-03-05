@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "app-filter",
-    "slug": "app-filter",
+    "name": "Quincaillerie android",
+    "slug": "Quincaillerieandroid",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "userInterfaceStyle": "light",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.sloumaallagui.Quincaillerieandroid"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5ce06a13-60a7-49a5-aabd-f2fc44fd3025"
+      }
     }
   }
 }

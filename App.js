@@ -272,7 +272,7 @@ async function getTableData(){
           <Text style={{textAlign:"center",marginBottom:10}}><Checkbox 
             onPress={() => {setAllcheck(!allcheck); 
               setAxeSelected(allcheck);setEntraxeSelected(allcheck); setTetiereSelected(allcheck);setCoteDSelected(allcheck);
-              setSysVerSelected(allcheck);setCrochetSelected(allcheck);setTringlesSelected(allcheck);setPenAuxSelected(allcheck); setPenDormSelected(allcheck); setNbGaletSelected(allcheck); setLongeurSelected(allcheck);setCarreSelected(allcheck);setRefConstructeurSelected(allcheck); setDenominationSelected(allcheck);setCommentairesSelected(allcheck); setFoussierSelected(allcheck);
+              setSysVerSelected(allcheck);setCrochetSelected(allcheck);setTringlesSelected(allcheck);setPenAuxSelected(allcheck); setPenDormSelected(allcheck); setNbGaletSelected(allcheck); setLongeurSelected(allcheck);setCarreSelected(allcheck);setRefConstructeurSelected(allcheck); setDenominationSelected(allcheck);setCommentairesSelected(allcheck); setFoussierSelected(allcheck); setMarqueSelected(allcheck);
             }}
             status={!allcheck ? 'checked' : 'unchecked'}
           />  { allcheck ? `Selectionner tous`:`Deslectionner tous`}</Text>
@@ -534,7 +534,7 @@ async function getTableData(){
           value={coteDValue}
           placeholder=""
         />
-        <Button title="Enregister les paramètres" onPress={()=>{  storeData().then(()=>props.navigation.navigate("Accueil")) }} />
+        <Button title="Enregister les paramètres" onPress={()=>{  storeData().then(()=> props.navigation.navigate("Quincaillerie")) }} />
       </ScrollView>
    
   );
@@ -545,8 +545,8 @@ async function getTableData(){
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Accueil" detachInactiveScreens>
-        <Stack.Screen name="Accueil" component={SearchResultScreen} 
+      <Stack.Navigator initialRouteName="Quincaillerie" detachInactiveScreens>
+        <Stack.Screen name="Quincaillerie" component={SearchResultScreen} 
 
          />
         <Stack.Screen name="Recherche" component={SearchParamScreen} />
